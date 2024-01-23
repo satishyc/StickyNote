@@ -24,7 +24,6 @@ public class NoteEntityValidation {
         catch (JsonProcessingException ex){
             throw new IllegalArgumentException("Verify that the input JSON data does not adhere to the expected JSON format.");
         }
-        validateViolations(noteEntity);
         return noteEntity;
     }
     public void validateViolations(NoteEntity noteEntity){

@@ -1,6 +1,5 @@
 package com.stickyNote.controller;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stickyNote.entity.NoteEntity;
 import com.stickyNote.service.NoteEntityService;
@@ -24,6 +23,7 @@ public class StickyNoteHandler {
 
 
         NoteEntity noteEntity = noteEntityValidation.validateNoteEntity(requestBody);
+        noteEntityValidation.validateViolations(noteEntity);
         service.saveNoteDetails(noteEntity);
 
         return new ResponseEntity<>("Response Saved Successfully", HttpStatus.OK);
@@ -51,6 +51,7 @@ public class StickyNoteHandler {
     @PutMapping("/update")
     public ResponseEntity<String> updateStickyNote(@RequestBody String requestBody){
         NoteEntity noteEntity = noteEntityValidation.validateNoteEntity(requestBody);
+        noteEntityValidation.validateViolations(noteEntity);
         service.updateNote(noteEntity);
         return new ResponseEntity<>(noteEntity.getId()+" Updated Successfully", HttpStatus.OK);
     }
