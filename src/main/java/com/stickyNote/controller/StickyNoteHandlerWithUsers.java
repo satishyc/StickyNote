@@ -1,7 +1,6 @@
 package com.stickyNote.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.stickyNote.entity.NoteEntity;
 import com.stickyNote.entity.NoteEntityUser;
 import com.stickyNote.service.NoteEntityUserService;
 import com.stickyNote.service.NoteEntityUserValidation;

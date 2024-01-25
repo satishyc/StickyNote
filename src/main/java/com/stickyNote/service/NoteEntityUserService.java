@@ -1,6 +1,5 @@
 package com.stickyNote.service;
 
-import com.stickyNote.entity.NoteEntity;
 import com.stickyNote.entity.NoteEntityUser;
 import com.stickyNote.entity.NoteEntityUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

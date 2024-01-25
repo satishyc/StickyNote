@@ -2,7 +2,6 @@ package com.stickyNote.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.stickyNote.entity.NoteEntity;
 import com.stickyNote.entity.NoteEntityUser;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
