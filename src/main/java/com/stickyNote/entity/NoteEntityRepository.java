@@ -12,4 +12,5 @@ public interface NoteEntityRepository extends MongoRepository<NoteEntity,String>
     void deleteById(String id);
 
     Optional<NoteEntity> findById(String id);
+    NoteEntity findByNote(String note);
 }

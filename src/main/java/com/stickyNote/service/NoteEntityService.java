@@ -15,7 +15,13 @@ public class NoteEntityService {
     NoteEntityRepository repository;
 
     public void saveNoteDetails(NoteEntity entity){
+        NoteEntity entity1 = repository.findByNote(entity.getNote());
+
+        if(entity1!=null){
+            throw new IllegalArgumentException("Given Note "+entity.getNote()+" is already present in records");
+        }
         repository.save(entity);
+
     }
     public List<NoteEntity> getAllStickyDetails(){
         return repository.findAll();
