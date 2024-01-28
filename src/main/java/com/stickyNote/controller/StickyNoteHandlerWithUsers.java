@@ -20,7 +20,10 @@ public class StickyNoteHandlerWithUsers {
     @Autowired
     NoteEntityUserService service;
     @PostMapping("/create")
-    public ResponseEntity<String> createStickyNote(@RequestBody NoteEntityUser entity){
+    public ResponseEntity<String> createStickyNote(@RequestParam String note,String userName){
+        NoteEntityUser entity = new NoteEntityUser();
+        entity.setNote(note);
+        entity.setUserName(userName);
         validation.validateViolations(entity);
         service.saveEntityDetails(entity);
         return new ResponseEntity<>("Response Saved Successfully", HttpStatus.OK);
@@ -72,8 +75,7 @@ public class StickyNoteHandlerWithUsers {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<String> updateData(@RequestParam  String id,NoteEntityUser entity){
-        entity.setId(id);
+    public ResponseEntity<String> updateData(@RequestParam  NoteEntityUser entity){
         validation.validateViolations(entity);
         service.updateDetails(entity);
         return new ResponseEntity<>(entity.getId()+" Updated Successfully", HttpStatus.OK);
