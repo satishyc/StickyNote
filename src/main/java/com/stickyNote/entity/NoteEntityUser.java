@@ -1,9 +1,7 @@
 package com.stickyNote.entity;
 
-import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "sticky_notes_with_user")
