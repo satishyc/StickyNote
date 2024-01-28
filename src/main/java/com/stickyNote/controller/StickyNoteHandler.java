@@ -19,10 +19,11 @@ public class StickyNoteHandler {
     @Autowired
     NoteEntityService service;
     @PostMapping("/create")
-    public ResponseEntity<String> createStickyNote(@RequestBody String requestBody) {
+    public ResponseEntity<String> createStickyNote(@RequestParam String note) {
 
 
-        NoteEntity noteEntity = noteEntityValidation.validateNoteEntity(requestBody);
+        NoteEntity noteEntity = new NoteEntity();
+        noteEntity.setNote(note);
         noteEntityValidation.validateViolations(noteEntity);
         service.saveNoteDetails(noteEntity);
 
@@ -42,18 +43,16 @@ public class StickyNoteHandler {
         return new ResponseEntity<>(jsonData, HttpStatus.OK);
     }
     @DeleteMapping("/delete")
-    public ResponseEntity<String> deleteStickyNote(@RequestBody String requestBody){
-        NoteEntity noteEntity = noteEntityValidation.validateNoteEntity(requestBody);
-        service.deleteById(noteEntity.getId());
-        return new ResponseEntity<>(noteEntity.getId()+" Deleted Successfully", HttpStatus.OK);
+    public ResponseEntity<String> deleteStickyNote(@RequestParam String id){
+        service.deleteById(id);
+        return new ResponseEntity<>(id+" Deleted Successfully", HttpStatus.OK);
     }
 
     @PutMapping("/update")
-    public ResponseEntity<String> updateStickyNote(@RequestBody String requestBody){
-        NoteEntity noteEntity = noteEntityValidation.validateNoteEntity(requestBody);
-        noteEntityValidation.validateViolations(noteEntity);
-        service.updateNote(noteEntity);
-        return new ResponseEntity<>(noteEntity.getId()+" Updated Successfully", HttpStatus.OK);
+    public ResponseEntity<String> updateStickyNote(@RequestBody NoteEntity entity){
+        noteEntityValidation.validateViolations(entity);
+        service.updateNote(entity);
+        return new ResponseEntity<>(entity.getId()+" Updated Successfully", HttpStatus.OK);
     }
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<String> handleIllegalArgumentException(Exception ex) {

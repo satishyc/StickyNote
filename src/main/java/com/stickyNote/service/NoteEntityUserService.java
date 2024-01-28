@@ -29,17 +29,17 @@ public class NoteEntityUserService {
         }
         return optional.get();
     }
-    public void deleteById(NoteEntityUser entity){
-        Optional<NoteEntityUser> optional = repository.findById(entity.getId());
+    public void deleteById(String id,String userName){
+        Optional<NoteEntityUser> optional = repository.findById(id);
         if(optional.isEmpty()){
-            throw new IllegalArgumentException("Given Id "+entity.getId()+" not present is present in records");
+            throw new IllegalArgumentException("Given Id "+id+" not present is present in records");
         }
         NoteEntityUser userEntity = optional.get();
-        if(!userEntity.getUserName().equals(entity.getUserName())){
-            throw new IllegalArgumentException("Given UserName "+entity.getUserName()+" not matching with given id");
+        if(!userEntity.getUserName().equals(userName)){
+            throw new IllegalArgumentException("Given UserName "+userName+" not matching with given id");
 
         }
-        repository.deleteById(entity.getId());
+        repository.deleteById(id);
     }
     public List<NoteEntityUser> findByUserNameDetails(String userName){
         return repository.findByUserName(userName);

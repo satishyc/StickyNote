@@ -20,8 +20,7 @@ public class StickyNoteHandlerWithUsers {
     @Autowired
     NoteEntityUserService service;
     @PostMapping("/create")
-    public ResponseEntity<String> createStickyNote(@RequestBody String requestBody){
-        NoteEntityUser entity = validation.validateDetails(requestBody);
+    public ResponseEntity<String> createStickyNote(@RequestBody NoteEntityUser entity){
         validation.validateViolations(entity);
         service.saveEntityDetails(entity);
         return new ResponseEntity<>("Response Saved Successfully", HttpStatus.OK);
@@ -67,16 +66,14 @@ public class StickyNoteHandlerWithUsers {
         return new ResponseEntity<>(jsonData, HttpStatus.OK);
     }
     @DeleteMapping("/delete")
-    public ResponseEntity<String> deleteStickyNoteById(@RequestBody String requestBody){
-        NoteEntityUser entity = validation.validateDetails(requestBody);
-        validation.validateViolations(entity);
-        service.deleteById(entity);
-        return new ResponseEntity<>(entity.getId()+" Deleted Successfully", HttpStatus.OK);
+    public ResponseEntity<String> deleteStickyNoteById(@RequestParam String id,String userName){
+        service.deleteById(id,userName);
+        return new ResponseEntity<>(id+" Deleted Successfully", HttpStatus.OK);
     }
 
     @PutMapping("/update")
-    public ResponseEntity<String> updateData(@RequestBody String requestBody){
-        NoteEntityUser entity = validation.validateDetails(requestBody);
+    public ResponseEntity<String> updateData(@RequestParam  String id,NoteEntityUser entity){
+        entity.setId(id);
         validation.validateViolations(entity);
         service.updateDetails(entity);
         return new ResponseEntity<>(entity.getId()+" Updated Successfully", HttpStatus.OK);
